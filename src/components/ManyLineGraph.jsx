@@ -6,8 +6,9 @@ import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { extent, max } from "d3-array";
 import ColorHash from "color-hash";
+import * as d3 from "d3";
 
-class LineGraph extends Component {
+class ManyLineGraph extends Component {
   static defaultProps = {
     margin: {
       top: 20,
@@ -40,6 +41,7 @@ class LineGraph extends Component {
     const y = scaleLinear().range([height, 0]);
 
     const valueline = line()
+      .curve(d3.curveBasis)
       .x(function(d) {
         return x(d.date);
       })
@@ -85,4 +87,4 @@ class LineGraph extends Component {
   }
 }
 
-export default LineGraph;
+export default ManyLineGraph;

@@ -1,0 +1,9 @@
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.nav-bar-content {
+  margin: auto;
+}

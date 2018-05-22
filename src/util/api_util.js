@@ -16,12 +16,14 @@ export const fetchMany = async (
   return result;
 };
 
-export const fetchOne = symbol => {
-  axios
+export const fetchOne = async (symbol, range) => {
+  const result = [];
+  await axios
     .get(
-      `https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote,news,chart&range=1m&last=10`
+      `https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote,chart&range=${range}`
     )
-    .then(({ data }) => console.log(data));
+    .then(({ data }) => result.push(data));
+  return result;
 };
 
 // const getWeekdayStrings = (date, num) => {

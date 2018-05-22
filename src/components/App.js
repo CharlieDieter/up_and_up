@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Dashboard from "./Dashboard";
+import StockList from "./StockList";
 import Featured from "./Featured";
 import "./App.css";
 import { Route } from "react-router-dom";
@@ -9,7 +10,8 @@ class App extends Component {
     return (
       <div className="App">
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/:symbol" component={Featured} />
+        <Route exact path="/list" component={StockList} />
+        <Route exact path="/featured/:symbol/:range" component={Featured} />
       </div>
     );
   }

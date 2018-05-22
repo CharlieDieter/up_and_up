@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import HeaderNav from "./HeaderNav";
-import LineGraph from "./LineGraph";
+import ManyLineGraph from "./ManyLineGraph";
 import { fetchMany } from "../util/api_util.js";
 
 class Dashboard extends Component {
@@ -14,9 +14,9 @@ class Dashboard extends Component {
     const dashboard = (
       <div>
         <HeaderNav />
-        <LineGraph
+        <ManyLineGraph
           rawData={this.state.data}
-          totalHeight={600}
+          totalHeight={500}
           totalWidth={960}
           margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
         />
