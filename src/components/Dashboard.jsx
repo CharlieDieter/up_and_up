@@ -14,7 +14,12 @@ class Dashboard extends Component {
     const dashboard = (
       <div>
         <HeaderNav />
-        <LineGraph data={this.state.data} />
+        <LineGraph
+          rawData={this.state.data}
+          totalHeight={600}
+          totalWidth={960}
+          margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
+        />
       </div>
     );
 
