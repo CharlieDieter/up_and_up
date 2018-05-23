@@ -9,7 +9,12 @@ import "../styles/Featured.css";
 class Featured extends Component {
   state = {
     loading: true,
-    range: this.props.match.params.range
+    range: this.props.match.params.range,
+    data: {
+      quote: {
+        comapnyName: ""
+      }
+    }
   };
 
   componentDidMount() {
@@ -30,11 +35,14 @@ class Featured extends Component {
 
   render() {
     const { symbol } = this.props.match.params;
-    this.state.data.quote ? ({ companyName } = this.state.data.quote) : null;
+    const { companyName } = this.state.data.quote;
+    const { range } = this.state;
+
     const featured = (
       <div>
         <HeaderNav />
         <h2>{companyName}</h2>
+        <h4>over the last {range}</h4>
         <div className="featured-body">
           <SingleLineGraph
             data={this.state.data}

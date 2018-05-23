@@ -1,6 +1,10 @@
 .range-list {
   margin: auto;
-  display: flex;
-  flex-direction: column;
+
   justify-content: space-around;
+}
+
+.range-option {
+  display: inline-block;
+  margin: 0 10px;
 }
