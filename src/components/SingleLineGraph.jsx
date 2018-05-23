@@ -116,6 +116,13 @@ class SingleLineGraph extends Component {
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text(`price  ($)`);
+
+    g
+      .append("path")
+      .attr("class", "mouse-line")
+      .style("stroke", "black")
+      .style("stroke-width", "1px")
+      .style("opacity", "0");
   }
 
   render() {

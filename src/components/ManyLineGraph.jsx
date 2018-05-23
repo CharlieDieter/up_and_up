@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { line } from "d3-shape";
-import { select } from "d3-selection";
+import { select, mouse } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { extent, max, min } from "d3-array";
 import graphScheme from "../styles/scheme";
@@ -38,6 +38,13 @@ class ManyLineGraph extends Component {
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    g
+      .append("rect")
+      .attr("opacity", 0)
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .on("mousemove", () => console.log(mouse(this.graphNode)));
 
     const x = scaleTime().range([0, width]);
     const y = scaleLinear().range([height, 0]);
