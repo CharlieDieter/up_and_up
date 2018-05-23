@@ -10,7 +10,7 @@ class HeaderNav extends Component {
           <Link to="/list">Trending Stocks</Link>
         </div>
         <Link to="/many/mostactive">
-          <h1 className="nav-bar-content">the market app</h1>
+          <h1 className="nav-bar-content">up and up</h1>
         </Link>
         <div className="nav-bar-content right">
           <input
