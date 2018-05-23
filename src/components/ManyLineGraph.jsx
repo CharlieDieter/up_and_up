@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { line } from "d3-shape";
-import { select, mouse } from "d3-selection";
+import { select, selectAll, mouse } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { extent, max, min } from "d3-array";
 import graphScheme from "../styles/scheme";
@@ -39,13 +39,6 @@ class ManyLineGraph extends Component {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    g
-      .append("rect")
-      .attr("opacity", 0)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .on("mousemove", () => console.log(mouse(this.graphNode)));
-
     const x = scaleTime().range([0, width]);
     const y = scaleLinear().range([height, 0]);
 
@@ -78,6 +71,7 @@ class ManyLineGraph extends Component {
       min(data, company => min(company.map(v => v.avg))),
       max(data, company => max(company.map(v => v.avg)))
     ]);
+
     data.forEach((company, idx) => {
       g
         .append("path")
@@ -87,7 +81,19 @@ class ManyLineGraph extends Component {
         .attr("d", valueline)
         .on("click", () =>
           this.props.history.push(`/featured/${company[0].symbol}/1m`)
-        );
+        )
+        .on("mouseover", () => {
+          select(`.${company[0].symbol}-label`)
+            .transition()
+            .duration(300)
+            .style("font-size", "30px");
+        })
+        .on("mouseleave", () => {
+          select(`.${company[0].symbol}-label`)
+            .transition()
+            .duration(300)
+            .style("font-size", "10px");
+        });
 
       g
         .append("text")
@@ -95,8 +101,10 @@ class ManyLineGraph extends Component {
           "transform",
           "translate(" + (width + 3) + "," + y(company[0].avg) + ")"
         )
+        .attr("class", `${company[0].symbol}-label`)
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
+        .style("font-size", "10px")
         .style("fill", graphScheme[(idx * 2) % graphScheme.length])
         .text(company[0].symbol);
     });
@@ -107,12 +115,13 @@ class ManyLineGraph extends Component {
       .call(axisBottom(x))
       .select(".domain")
       .remove();
+
     g
       .append("g")
       .call(axisLeft(y))
       .attr("class", "y-axis")
-      .select(".domain")
-      .remove();
+      .select(".domain");
+
     g
       .append("g")
       .append("text")
@@ -125,7 +134,7 @@ class ManyLineGraph extends Component {
   }
 
   render() {
-    return <svg ref={node => (this.graphNode = node)} />;
+    return <svg className="graph" ref={node => (this.graphNode = node)} />;
   }
 }
 

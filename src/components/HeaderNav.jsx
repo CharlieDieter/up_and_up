@@ -6,12 +6,18 @@ class HeaderNav extends Component {
   render() {
     return (
       <div className="header-nav">
-        <div className="nav-bar-content left">hi</div>
-        <Link to="/">
-          <h2 className="nav-bar-content">the market app</h2>
+        <div className="nav-bar-content left">
+          <Link to="/list">Trending Stocks</Link>
+        </div>
+        <Link to="/many/mostactive">
+          <h1 className="nav-bar-content">the market app</h1>
         </Link>
         <div className="nav-bar-content right">
-          <Link to="/">hi</Link>
+          <input
+            className="header-input"
+            type="text"
+            placeholder="search by symbol"
+          />
         </div>
       </div>
     );

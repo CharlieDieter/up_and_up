@@ -9,3 +9,15 @@
   margin: auto;
   color: white;
 }
+
+.nav-bar-content a {
+  color: white;
+  background: grey;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.header-input {
+  padding: 10px;
+  border-radius: 5px;
+}

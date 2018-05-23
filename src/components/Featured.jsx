@@ -51,7 +51,7 @@ class Featured extends Component {
             margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
             range={this.state.range}
           />
-          <RangeList symbol={symbol} />
+          <RangeList symbol={symbol} range={range} />
         </div>
       </div>
     );

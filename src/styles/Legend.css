@@ -1,0 +1,22 @@
+.legend {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  margin: auto;
+}
+
+.legend-link {
+  display: flex;
+}
+
+.legend-square {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.legend-text {
+  font-size: 20px;
+  margin: auto auto auto 10px;
+}

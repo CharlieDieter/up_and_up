@@ -11,3 +11,9 @@
   cursor: pointer;
   stroke-width: 8px;
 }
+
+.graph {
+  background: #eeeeee;
+  padding: 0 40px 20px;
+  margin: 0 0 20px;
+}
