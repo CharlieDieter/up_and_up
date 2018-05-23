@@ -7,6 +7,7 @@ import { axisLeft, axisBottom } from "d3-axis";
 import { extent } from "d3-array";
 import ColorHash from "color-hash";
 import * as d3 from "d3";
+import "../styles/LineGraph.css";
 
 class SingleLineGraph extends Component {
   static defaultProps = {
@@ -24,6 +25,16 @@ class SingleLineGraph extends Component {
   componentDidMount() {
     this.createLineGraph();
   }
+  // TODO: use .enter() and exit().remove() to have transitions
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data.chart.length !== this.props.data.chart.length) {
+      this.props.data.chart = nextProps.data.chart;
+      select(".single-line").remove();
+      select(".y-axis").remove();
+      select(".x-axis").remove();
+      this.createLineGraph();
+    }
+  }
 
   createLineGraph() {
     const { margin, totalWidth, totalHeight, data } = this.props;
@@ -31,9 +42,11 @@ class SingleLineGraph extends Component {
     const width = totalWidth - margin.left - margin.right;
     const height = totalHeight - margin.top - margin.bottom;
     const node = select(this.graphNode);
+
     const g = node
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      .attr("class", "maingroup")
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -51,6 +64,27 @@ class SingleLineGraph extends Component {
 
     const dates = data.chart.map(d => parseTime(d.date));
 
+    g
+      .append("g")
+      .attr("class", "grid")
+      .attr("transform", "translate(0," + height + ")")
+      .call(
+        axisBottom(x)
+          .ticks(dates.length % 10)
+          .tickSize(-height)
+          .tickFormat("")
+      );
+
+    g
+      .append("g")
+      .attr("class", "grid")
+      .call(
+        axisLeft(y)
+          .ticks(10)
+          .tickSize(-width)
+          .tickFormat("")
+      );
+
     x.domain(extent(dates, date => date));
     y.domain(extent(data.chart, c => c.close));
 
@@ -58,16 +92,28 @@ class SingleLineGraph extends Component {
       .append("path")
       .data([data.chart])
       .style("stroke", colorHash.hex(data.quote.symbol))
-      .attr("class", "line")
+      .attr("class", "single-line")
       .attr("d", valueline);
 
     g
       .append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(axisBottom(x))
-      .select(".domain");
+      .attr("class", "x-axis");
 
-    g.append("g").call(axisLeft(y));
+    g
+      .append("g")
+      .call(axisLeft(y))
+      .attr("class", "y-axis");
+    g
+      .append("g")
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("x", -6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("price ($)");
   }
 
   render() {

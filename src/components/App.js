@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Dashboard from "./Dashboard";
 import StockList from "./StockList";
 import Featured from "./Featured";
-import "./App.css";
+import "../styles/App.css";
 import { Route } from "react-router-dom";
 
 class App extends Component {

@@ -1,15 +1,21 @@
 import React from "react";
+import "../styles/RangeList.css";
 import { Link } from "react-router-dom";
 
 const RangeList = props => {
-  const ranges = ["5y", "2y", "1y", "ytd", "6m", "3m", "1m"].map(opt => {
+  const ranges = ["5y", "2y", "1y", "ytd", "6m", "3m", "1m"].map(option => {
     return (
-      <Link to={`/featured/${props.symbol}/${opt}`} key={`option-${opt}`}>
-        {opt}
-      </Link>
+      <li>
+        <Link
+          to={`/featured/${props.symbol}/${option}`}
+          key={`option-${option}`}
+        >
+          {option}
+        </Link>
+      </li>
     );
   });
-  return <div>{ranges}</div>;
+  return <div className="range-list">{ranges}</div>;
 };
 
 export default RangeList;

@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { line } from "d3-shape";
 import { select } from "d3-selection";
-import { axisLeft, axisBottom } from "d3-axis";
-import { extent, max } from "d3-array";
-import ColorHash from "color-hash";
+import { axisBottom } from "d3-axis";
+import { extent, max, min } from "d3-array";
+import scheme from "../styles/scheme";
 import * as d3 from "d3";
+import "../styles/ManyLineGraph.css";
 
 class ManyLineGraph extends Component {
   static defaultProps = {
@@ -27,7 +29,7 @@ class ManyLineGraph extends Component {
 
   createLineGraph() {
     const { margin, totalWidth, totalHeight, rawData } = this.props;
-    const colorHash = new ColorHash();
+
     const width = totalWidth - margin.left - margin.right;
     const height = totalHeight - margin.top - margin.bottom;
     const node = select(this.graphNode);
@@ -40,20 +42,14 @@ class ManyLineGraph extends Component {
     const x = scaleTime().range([0, width]);
     const y = scaleLinear().range([height, 0]);
 
-    const valueline = line()
-      .curve(d3.curveBasis)
-      .x(function(d) {
-        return x(d.date);
-      })
-      .y(function(d) {
-        return y(d.close);
-      });
-
     const data = Object.keys(rawData).map(symbol => {
       const values = [];
       rawData[symbol].forEach(week => {
+        const highest = max(week.map(day => day.close));
+
         week.forEach(day => {
-          values.push({ symbol, date: parseTime(day.date), close: day.close });
+          const avg = day.close / highest * 100;
+          values.push({ symbol, date: parseTime(day.date), avg });
         });
       });
       return values;
@@ -61,25 +57,38 @@ class ManyLineGraph extends Component {
 
     const dates = data[0].map(d => d.date);
 
-    x.domain(extent(dates, date => date));
-    y.domain([0, max(data, company => max(company.map(v => v.close)))]);
+    const valueline = line()
+      .curve(d3.curveBasis)
+      .x(function(d) {
+        return x(d.date);
+      })
+      .y(function(d) {
+        return y(d.avg);
+      });
 
-    data.forEach(company => {
+    x.domain(extent(dates, date => date));
+    y.domain([
+      min(data, company => min(company.map(v => v.avg))),
+      max(data, company => max(company.map(v => v.avg)))
+    ]);
+    data.forEach((company, idx) => {
       g
         .append("path")
         .data([company])
-        .style("stroke", colorHash.hex(company[0].symbol))
+        .style("stroke", scheme[(idx * 2) % scheme.length])
         .attr("class", "line")
-        .attr("d", valueline);
+        .attr("d", valueline)
+        .on("click", () =>
+          this.props.history.push(`/featured/${company[0].symbol}/1m`)
+        );
     });
 
     g
       .append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(axisBottom(x))
-      .select(".domain");
-
-    g.append("g").call(axisLeft(y));
+      .select(".domain")
+      .remove();
   }
 
   render() {
@@ -87,4 +96,4 @@ class ManyLineGraph extends Component {
   }
 }
 
-export default ManyLineGraph;
+export default withRouter(ManyLineGraph);

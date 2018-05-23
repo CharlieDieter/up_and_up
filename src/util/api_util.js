@@ -4,7 +4,7 @@ import axios from "axios";
 // TODO: get past five weekdays from moment
 
 export const fetchMany = async (
-  symbols = ["ABEV", "LHO", "ITUB", "CZR", "CX"]
+  symbols = ["AAPL", "C", "GE", "GOOG", "MSFT"]
 ) => {
   const result = {};
   await asyncForEach(symbols, async symbol => {
@@ -44,24 +44,6 @@ const asyncForEach = async (array, callback) => {
     await callback(array[i]);
   }
 };
-
-// // TODO: replace fetchMany with more accurate minute-by-minute data
-// export const fetchMany = async (
-//   symbols = ["ABEV", "LHO", "ITUB", "CZR", "CX"],
-//   days = ["20180510", "20180509", "20180509", "20180509", "20180509"]
-// ) => {
-//   const result = {};
-//   await asyncForEach(symbols, async symbol => {
-//     result[symbol] = [];
-//
-//     await asyncForEach(days, async day => {
-//       await axios
-//         .get(`https://api.iextrading.com/1.0/stock/${symbol}/chart/date/${day}`)
-//         .then(({ data }) => result[symbol].push(data));
-//     });
-//   });
-//   return result;
-// };
 
 // export const getTopFive = async () => {
 //   var symbols = [];

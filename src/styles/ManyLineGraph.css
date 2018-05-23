@@ -1,0 +1,13 @@
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 6px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+.line:hover {
+  opacity: 1;
+  transition: 0.3s;
+  cursor: pointer;
+  stroke-width: 8px;
+}

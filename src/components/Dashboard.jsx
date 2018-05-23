@@ -16,9 +16,9 @@ class Dashboard extends Component {
         <HeaderNav />
         <ManyLineGraph
           rawData={this.state.data}
-          totalHeight={500}
-          totalWidth={960}
-          margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
+          totalHeight={window.innerHeight - window.innerHeight / 100 * 20}
+          totalWidth={window.innerWidth - window.innerWidth / 100 * 20}
+          margin={{ top: 100, right: 20, bottom: 30, left: 50 }}
         />
       </div>
     );
