@@ -7,13 +7,8 @@ const RangeList = props => {
     .filter(r => r !== props.range)
     .map(option => {
       return (
-        <li className="range-option">
-          <Link
-            to={`/featured/${props.symbol}/${option}`}
-            key={`option-${option}`}
-          >
-            {option}
-          </Link>
+        <li className="range-option" key={`option-${option}`}>
+          <Link to={`/featured/${props.symbol}/${option}`}>{option}</Link>
         </li>
       );
     });

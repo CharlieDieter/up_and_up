@@ -20,13 +20,20 @@ class Legend extends Component {
     const legend = (
       <div className="legend">
         {this.state.symbols.map((s, idx) => {
-          const {
+          let {
             companyName,
             close,
             change,
             changePercent
           } = this.state.details[s][0].quote;
 
+          const upArrow = <i class="material-icons">arrow_upward</i>;
+          const downArrow = <i class="material-icons">arrow_downward</i>;
+
+          const changePercentColor =
+            changePercent < 0 ? "rgb(207, 61, 61)" : "rgb(52, 203, 117)";
+          const changeColor =
+            change < 0 ? "rgb(207, 61, 61)" : "rgb(52, 203, 117)";
           return (
             <div className="legend-details" key={`legend-${s}`}>
               <Link
@@ -34,17 +41,37 @@ class Legend extends Component {
                 style={{ color: graphScheme[(idx * 2) % graphScheme.length] }}
                 className="legend-link"
               >
-                <div
-                  style={{
-                    background: graphScheme[(idx * 2) % graphScheme.length]
-                  }}
-                  className="legend-square"
-                >
-                  h
+                <div className="legend-link-contents">
+                  <div
+                    style={{
+                      background: graphScheme[(idx * 2) % graphScheme.length]
+                    }}
+                    className="legend-square"
+                  >
+                    h
+                  </div>
+                  <div className="legend-text">{s}</div>
                 </div>
-                <div className="legend-text">{s}</div>
               </Link>
-              <h3 />
+              <h3 className="legend-company-name">{companyName}</h3>
+              <div className="legend-stats">
+                <div className="close">{`$${close}`}</div>
+                <div>
+                  <div className="change" style={{ color: changeColor }}>
+                    {change < 0 ? downArrow : upArrow}
+                    {change}
+                    <i />
+                  </div>
+                  <div
+                    className="change-percent"
+                    style={{ color: changePercentColor }}
+                  >
+                    {changePercent < 0 ? downArrow : upArrow}
+                    {`(${Math.round(changePercent * 1000) / 100}%)`}
+                    <i />
+                  </div>
+                </div>
+              </div>
             </div>
           );
         })}

@@ -29,7 +29,7 @@ class Dashboard extends Component {
     const dashboard = (
       <div>
         <HeaderNav />
-        <h2>{`The five ${group} stocks of the last week`}</h2>
+        <h2>{`${group} stocks of the last week`}</h2>
         <ManyLineGraph
           rawData={this.state.data}
           totalHeight={window.innerHeight - window.innerHeight / 100 * 50}

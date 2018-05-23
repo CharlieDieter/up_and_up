@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import HeaderNav from "./HeaderNav";
+import News from "./News";
 import SingleLineGraph from "./SingleLineGraph";
 import RangeList from "./RangeList";
-import { fetchOne } from "../util/api_util.js";
+import { fetchOne, fetchDetails } from "../util/api_util.js";
 import { withRouter } from "react-router-dom";
 import "../styles/Featured.css";
 
@@ -37,17 +38,30 @@ class Featured extends Component {
     const { symbol } = this.props.match.params;
     const { companyName } = this.state.data.quote;
     const { range } = this.state;
-
+    const rangeDescription =
+      range === "1m"
+        ? "month"
+        : range === "3m"
+          ? "three months"
+          : range === "6m"
+            ? "six months"
+            : range === "1y"
+              ? "year"
+              : range === "2y"
+                ? "two years"
+                : range === "ytd" ? "year to date" : "five years";
     const featured = (
       <div>
         <HeaderNav />
-        <h2>{companyName}</h2>
-        <h4>over the last {range}</h4>
+        <h2>
+          {companyName} over the last {rangeDescription}
+        </h2>
+        <h4 />
         <div className="featured-body">
           <SingleLineGraph
             data={this.state.data}
             totalHeight={window.innerHeight - window.innerHeight / 100 * 40}
-            totalWidth={window.innerWidth - window.innerWidth / 100 * 40}
+            totalWidth={window.innerWidth - window.innerWidth / 100 * 20}
             margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
             range={this.state.range}
           />

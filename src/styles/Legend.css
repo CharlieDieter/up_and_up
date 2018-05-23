@@ -5,8 +5,31 @@
   margin: auto;
 }
 
+.legend-details {
+  margin: 10px;
+  padding: 5px;
+}
+
 .legend-link {
   display: flex;
+}
+
+.legend-link-contents {
+  display: flex;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.close {
+  line-height: 50px;
+  display: inline-block;
+  margin-bottom: -6px;
+}
+
+.legend-company-name {
+  display: flex;
+  max-width: 200px;
+  margin-bottom: -8px;
 }
 
 .legend-square {

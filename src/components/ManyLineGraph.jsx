@@ -130,7 +130,7 @@ class ManyLineGraph extends Component {
       .attr("x", -6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("% of daily high");
+      .text("% of weekly high");
   }
 
   render() {
