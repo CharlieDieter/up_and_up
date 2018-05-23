@@ -1,3 +1,3 @@
-## Up and Up 📈
+## 📈📈 Up and Up 📈📈
 
-##### A visualization of stock market data built using React, D3, and the IEX Trading API.
+##### A visualization of stock market data built with React, D3, and the IEX Trading API.
