@@ -53,7 +53,7 @@ class Legend extends Component {
                   <div className="legend-text">{s}</div>
                 </div>
               </Link>
-              <h3 className="legend-company-name">{companyName}</h3>
+              <h5 className="legend-company-name">{companyName}</h5>
               <div className="legend-stats">
                 <div className="close">{`$${close}`}</div>
                 <div>

@@ -2,6 +2,7 @@
   "name": "market_api_test",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://charliedieter.github.io/up_and_up",
   "dependencies": {
     "axios": "^0.18.0",
     "color-hash": "^1.0.3",
@@ -21,7 +22,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
   }
 }

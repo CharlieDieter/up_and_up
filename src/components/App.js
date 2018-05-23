@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <Route exact path="/many/:batch" component={Dashboard} />
-        <Route exact path="/list" component={StockList} />
+        <Route exact path="/" component={StockList} />
         <Route exact path="/featured/:symbol/:range" component={Featured} />
       </div>
     );
