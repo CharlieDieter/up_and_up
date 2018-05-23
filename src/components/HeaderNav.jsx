@@ -7,7 +7,7 @@ class HeaderNav extends Component {
     return (
       <div className="header-nav">
         <div className="nav-bar-content left">
-          <Link to="/list">Trending Stocks</Link>
+          <Link to="/">Trending Stocks</Link>
         </div>
         <Link to="/many/mostactive">
           <h1 className="nav-bar-content">up and up</h1>
