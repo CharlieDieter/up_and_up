@@ -31,6 +31,7 @@ class SingleLineGraph extends Component {
       this.props.data.chart = nextProps.data.chart;
       select(".single-line").remove();
       select(".y-axis").remove();
+      select(".y-axis-label").remove();
       select(".x-axis").remove();
       this.createLineGraph();
     }
@@ -108,12 +109,13 @@ class SingleLineGraph extends Component {
     g
       .append("g")
       .append("text")
+      .attr("class", "y-axis-label")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("x", -6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("price ($)");
+      .text(`price  ($)`);
   }
 
   render() {

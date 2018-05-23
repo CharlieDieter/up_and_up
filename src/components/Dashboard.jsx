@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import HeaderNav from "./HeaderNav";
 import ManyLineGraph from "./ManyLineGraph";
-import { fetchMany } from "../util/api_util.js";
+import { getTopFive } from "../util/api_util.js";
 
 class Dashboard extends Component {
   state = {
-    loading: true
+    loading: true,
+    batch: "gainers"
   };
   componentDidMount() {
-    fetchMany().then(data => this.setState({ loading: false, data }));
+    getTopFive(this.state.batch).then(data =>
+      this.setState({ loading: false, data })
+    );
   }
   render() {
     const dashboard = (

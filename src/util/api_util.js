@@ -1,11 +1,21 @@
 import axios from "axios";
 
-// TODO: have fetchMany use symbols from '/stock/market/list/mostactive'
 // TODO: get past five weekdays from moment
 
-export const fetchMany = async (
-  symbols = ["AAPL", "C", "GE", "GOOG", "MSFT"]
-) => {
+export const getTopFive = async batch => {
+  var symbols = [];
+  return await axios
+    .get(`https://api.iextrading.com/1.0/stock/market/list/${batch}`)
+    .then(({ data }) => {
+      data.forEach((d, i) => {
+        if (i > 4) return;
+        symbols.push(d.symbol);
+      });
+    })
+    .then(() => fetchMany(symbols));
+};
+
+const fetchMany = async (symbols = ["AAPL", "C", "GE", "GOOG", "MSFT"]) => {
   const result = {};
   await asyncForEach(symbols, async symbol => {
     result[symbol] = [];
@@ -44,16 +54,3 @@ const asyncForEach = async (array, callback) => {
     await callback(array[i]);
   }
 };
-
-// export const getTopFive = async () => {
-//   var symbols = [];
-//   await axios
-//     .get(`https://api.iextrading.com/1.0/stock/market/list/mostactive`)
-//     .then(({ data }) => {
-//       data.forEach((d, i) => {
-//         if (i > 4) return;
-//         symbols.push(d.symbol);
-//       });
-//     })
-//     .then(() => fetchMany(symbols));
-// };

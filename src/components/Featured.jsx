@@ -30,15 +30,18 @@ class Featured extends Component {
 
   render() {
     const { symbol } = this.props.match.params;
+    this.state.data.quote ? ({ companyName } = this.state.data.quote) : null;
     const featured = (
       <div>
         <HeaderNav />
+        <h2>{companyName}</h2>
         <div className="featured-body">
           <SingleLineGraph
             data={this.state.data}
             totalHeight={window.innerHeight - window.innerHeight / 100 * 40}
             totalWidth={window.innerWidth - window.innerWidth / 100 * 40}
             margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
+            range={this.state.range}
           />
           <RangeList symbol={symbol} />
         </div>

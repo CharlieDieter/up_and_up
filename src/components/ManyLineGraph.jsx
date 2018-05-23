@@ -4,9 +4,9 @@ import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { line } from "d3-shape";
 import { select } from "d3-selection";
-import { axisBottom } from "d3-axis";
+import { axisLeft, axisBottom } from "d3-axis";
 import { extent, max, min } from "d3-array";
-import scheme from "../styles/scheme";
+import graphScheme from "../styles/scheme";
 import * as d3 from "d3";
 import "../styles/ManyLineGraph.css";
 
@@ -75,12 +75,23 @@ class ManyLineGraph extends Component {
       g
         .append("path")
         .data([company])
-        .style("stroke", scheme[(idx * 2) % scheme.length])
+        .style("stroke", graphScheme[(idx * 2) % graphScheme.length])
         .attr("class", "line")
         .attr("d", valueline)
         .on("click", () =>
           this.props.history.push(`/featured/${company[0].symbol}/1m`)
         );
+
+      g
+        .append("text")
+        .attr(
+          "transform",
+          "translate(" + (width + 3) + "," + y(company[0].avg) + ")"
+        )
+        .attr("dy", ".35em")
+        .attr("text-anchor", "start")
+        .style("fill", graphScheme[(idx * 2) % graphScheme.length])
+        .text(company[0].symbol);
     });
 
     g
@@ -89,6 +100,21 @@ class ManyLineGraph extends Component {
       .call(axisBottom(x))
       .select(".domain")
       .remove();
+    g
+      .append("g")
+      .call(axisLeft(y))
+      .attr("class", "y-axis")
+      .select(".domain")
+      .remove();
+    g
+      .append("g")
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("x", -6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("% of daily high");
   }
 
   render() {
