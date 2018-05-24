@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Legend from "./Legend";
 import ManyLineGraph from "./ManyLineGraph";
+import Loader from "./Loader";
 import { getTopFive } from "../util/api_util.js";
 import "../styles/Dashboard.css";
 
@@ -39,7 +40,7 @@ class Dashboard extends Component {
 
     const loading = <div>Loading...</div>;
 
-    return this.state.loading ? loading : dashboard;
+    return this.state.loading ? <Loader /> : dashboard;
   }
 }
 

@@ -1,0 +1,47 @@
+@-webkit-keyframes spinner {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes spinner {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes spinner {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(360deg);
+  }
+  50% {
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+#loader {
+  margin: 20% auto;
+}
+#loader {
+  -webkit-animation: spinner 3s infinite;
+  -moz-animation: spinner 3s infinite;
+  -o-animation: spinner 3s infinite;
+  animation: spinner 3s infinite;
+}

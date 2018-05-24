@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SingleLineGraph from "./SingleLineGraph";
 import RangeList from "./RangeList";
 import News from "./News";
+import Loader from "./Loader";
 import { fetchOne } from "../util/api_util.js";
 import { withRouter } from "react-router-dom";
 import "../styles/Featured.css";
@@ -75,7 +76,7 @@ class Featured extends Component {
 
     const loading = <div>Loading...</div>;
 
-    return this.state.loading ? loading : featured;
+    return this.state.loading ? <Loader /> : featured;
   }
 }
 

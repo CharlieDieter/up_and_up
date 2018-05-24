@@ -86,13 +86,15 @@ class ManyLineGraph extends Component {
           select(`.${company[0].symbol}-label`)
             .transition()
             .duration(300)
-            .style("font-size", "30px");
+            .style("font-size", "30px")
+            .style("opacity", 1);
         })
         .on("mouseleave", () => {
           select(`.${company[0].symbol}-label`)
             .transition()
             .duration(300)
-            .style("font-size", "10px");
+            .style("font-size", "10px")
+            .style("opacity", 0.4);
         });
 
       g
@@ -105,8 +107,28 @@ class ManyLineGraph extends Component {
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("font-size", "10px")
+        .style("opacity", 0.4)
         .style("fill", graphScheme[(idx * 2) % graphScheme.length])
-        .text(company[0].symbol);
+        .text(company[0].symbol)
+        .style("cursor", "pointer")
+        .on("mouseover", () => {
+          select(`.${company[0].symbol}-label`)
+            .transition()
+            .duration(300)
+            .style("font-size", "30px")
+            .style("opacity", 1);
+        })
+        .on("mouseleave", () => {
+          select(`.${company[0].symbol}-label`)
+            .transition()
+            .duration(300)
+
+            .style("font-size", "10px")
+            .style("opacity", 0.4);
+        })
+        .on("click", () =>
+          this.props.history.push(`/featured/${company[0].symbol}/1m`)
+        );
     });
 
     g
