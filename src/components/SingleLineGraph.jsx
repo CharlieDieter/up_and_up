@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
-import { line } from "d3-shape";
+import { line, curveBasis } from "d3-shape";
 import { select, selectAll } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { extent } from "d3-array";
 import ColorHash from "color-hash";
-import * as d3 from "d3";
 import "../styles/LineGraph.css";
 
 class SingleLineGraph extends Component {
@@ -60,7 +59,7 @@ class SingleLineGraph extends Component {
     const y = scaleLinear().range([height, 0]);
 
     const valueline = line()
-      .curve(d3.curveBasis)
+      .curve(curveBasis)
       .x(function(d) {
         return x(parseTime(d.date));
       })
