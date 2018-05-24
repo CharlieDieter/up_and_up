@@ -1,6 +1,9 @@
 .featured {
   padding: 50px;
 }
+.featured-header {
+  margin-top: -30px;
+}
 .featured-body {
   justify-content: space-around;
 }

@@ -3,6 +3,7 @@ import SingleLineGraph from "./SingleLineGraph";
 import RangeList from "./RangeList";
 import News from "./News";
 import Loader from "./Loader";
+import Legend from "./Legend";
 import { fetchOne } from "../util/api_util.js";
 import { withRouter } from "react-router-dom";
 import "../styles/Featured.css";
@@ -11,6 +12,7 @@ class Featured extends Component {
   state = {
     loading: true,
     range: this.props.match.params.range,
+    symbol: this.props.match.params.symbol,
     data: {
       quote: {
         comapnyName: ""
@@ -27,9 +29,9 @@ class Featured extends Component {
 
   componentDidUpdate() {
     const { symbol, range } = this.props.match.params;
-    if (range !== this.state.range) {
+    if (range !== this.state.range || symbol !== this.state.symbol) {
       fetchOne(symbol, range).then(data => {
-        this.setState({ data: data[0], range });
+        this.setState({ data: data[0], symbol, range });
       });
     }
   }
@@ -57,15 +59,16 @@ class Featured extends Component {
           <h2 className="featured-header">
             {companyName} over the last {rangeDescription}
           </h2>
+          <RangeList symbol={symbol} range={range} />
           <div className="featured-body">
             <SingleLineGraph
               data={this.state.data}
-              totalHeight={window.innerHeight - window.innerHeight / 100 * 40}
-              totalWidth={window.innerWidth - window.innerWidth / 100 * 30}
+              totalHeight={window.innerHeight - window.innerHeight / 100 * 50}
+              totalWidth={window.innerWidth - window.innerWidth / 100 * 40}
               margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
               range={this.state.range}
             />
-            <RangeList symbol={symbol} range={range} />
+            <Legend symbol={symbol} />
           </div>
         </div>
         <div className="news-container">

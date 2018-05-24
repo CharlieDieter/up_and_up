@@ -27,7 +27,7 @@ class Dashboard extends Component {
         : batch === "mostactive" ? "most active" : "biggest losing";
     const dashboard = (
       <div>
-        <h2>{`${group} stocks of the last week`}</h2>
+        <h2>{`${group} stocks`}</h2>
         <ManyLineGraph
           rawData={this.state.data}
           totalHeight={window.innerHeight - window.innerHeight / 100 * 50}

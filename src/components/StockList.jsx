@@ -22,7 +22,7 @@ class StockList extends Component {
         <div className="list-nav">
           <div className="stock-list-group">
             <h3>
-              <Link to="/many/mostactive">Most active this week</Link>
+              <Link to="/many/mostactive">Most Active Today</Link>
             </h3>
             {this.state.active.map(s => (
               <li key={`${s}`}>
@@ -32,7 +32,7 @@ class StockList extends Component {
           </div>
           <div className="stock-list-group">
             <h3>
-              <Link to="/many/gainers">Highest gainers</Link>
+              <Link to="/many/gainers">Highest Gainers</Link>
             </h3>
             {this.state.gainers.map(s => (
               <li key={`${s}`}>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { line } from "d3-shape";
-import { select } from "d3-selection";
+import { select, selectAll } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { extent } from "d3-array";
 import ColorHash from "color-hash";
@@ -27,12 +27,17 @@ class SingleLineGraph extends Component {
   }
   // TODO: use .enter() and exit().remove() to have transitions
   componentWillReceiveProps(nextProps) {
-    if (nextProps.data.chart.length !== this.props.data.chart.length) {
+    if (
+      nextProps.data.chart.length !== this.props.data.chart.length ||
+      nextProps.data.quote.symbol !== this.props.data.quote.symbol
+    ) {
       this.props.data.chart = nextProps.data.chart;
+      this.props.data.quote = nextProps.data.quote;
       select(".single-line").remove();
       select(".y-axis").remove();
       select(".y-axis-label").remove();
       select(".x-axis").remove();
+      selectAll(".grid").remove();
       this.createLineGraph();
     }
   }
@@ -92,7 +97,7 @@ class SingleLineGraph extends Component {
     g
       .append("path")
       .data([data.chart])
-      .style("stroke", colorHash.hex(data.quote.symbol))
+      .style("stroke", colorHash.hex(data.quote.symbol.toLowerCase()))
       .attr("class", "single-line")
       .attr("d", valueline);
 

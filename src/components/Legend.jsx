@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { getTopFiveSymbols, fetchDetails } from "../util/api_util.js";
 import graphScheme from "../styles/scheme";
+import ColorHash from "color-hash";
 import "../styles/Legend.css";
 
 class Legend extends Component {
@@ -10,13 +11,43 @@ class Legend extends Component {
     loading: true
   };
   componentDidMount() {
-    getTopFiveSymbols(this.props.batch).then(symbols =>
-      fetchDetails(symbols).then(details =>
-        this.setState({ symbols, details, loading: false })
-      )
-    );
+    if (this.props.batch) {
+      getTopFiveSymbols(this.props.batch).then(symbols =>
+        fetchDetails(symbols).then(details =>
+          this.setState({ symbols, details, loading: false })
+        )
+      );
+    } else if (this.props.symbol) {
+      fetchDetails([this.props.symbol]).then(details =>
+        this.setState({ symbols: [this.props.symbol], details, loading: false })
+      );
+    }
+    this.colorHash = new ColorHash();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.symbol && this.props.symbol !== nextProps.symbol) {
+      this.setState({ loading: true }, () =>
+        fetchDetails([nextProps.symbol]).then(details =>
+          this.setState({
+            symbols: [nextProps.symbol],
+            details,
+            loading: false
+          })
+        )
+      );
+    }
   }
   render() {
+    const flexOnFeatured = this.props.symbol
+      ? {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: " 50%"
+        }
+      : {};
+
     const legend = (
       <div className="legend">
         {this.state.symbols.map((s, idx) => {
@@ -27,6 +58,10 @@ class Legend extends Component {
             changePercent
           } = this.state.details[s][0].quote;
 
+          const colorOnFeatured = this.props.symbol
+            ? this.colorHash.hex(this.props.symbol)
+            : graphScheme[(idx * 2) % graphScheme.length];
+
           const upArrow = <i className="material-icons">arrow_upward</i>;
           const downArrow = <i className="material-icons">arrow_downward</i>;
 
@@ -35,26 +70,33 @@ class Legend extends Component {
           const changeColor =
             change < 0 ? "rgb(207, 61, 61)" : "rgb(52, 203, 117)";
           return (
-            <div className="legend-details" key={`legend-${s}`}>
-              <Link
-                to={`/featured/${s}/1m`}
-                style={{ color: graphScheme[(idx * 2) % graphScheme.length] }}
-                className="legend-link"
-              >
-                <div className="legend-link-contents">
-                  <div
-                    style={{
-                      background: graphScheme[(idx * 2) % graphScheme.length]
-                    }}
-                    className="legend-square"
-                  >
-                    h
+            <div
+              className="legend-details"
+              key={`legend-${s}`}
+              style={flexOnFeatured}
+            >
+              <div>
+                <Link
+                  to={`/featured/${s}/1m`}
+                  style={{ color: colorOnFeatured }}
+                  className="legend-link"
+                >
+                  <div className="legend-link-contents">
+                    <div
+                      style={{
+                        background: colorOnFeatured
+                      }}
+                      className="legend-square"
+                    >
+                      h
+                    </div>
+                    <div className="legend-text">{s}</div>
                   </div>
-                  <div className="legend-text">{s}</div>
-                </div>
-              </Link>
-              <h5 className="legend-company-name">{companyName}</h5>
+                </Link>
+                <h5 className="legend-company-name">{companyName}</h5>
+              </div>
               <div className="legend-stats">
+                <div className="currently">currently:</div>
                 <div className="close">{`$${close}`}</div>
                 <div>
                   <div className="change" style={{ color: changeColor }}>
