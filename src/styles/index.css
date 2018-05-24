@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: "PT Sans", sans-serif;
   font-weight: light;
+  background: #eeeeee;
 }
 li {
   list-style: none;
