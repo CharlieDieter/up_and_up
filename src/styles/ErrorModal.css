@@ -13,8 +13,10 @@
   margin: auto;
   margin-top: 10%;
   width: 50%;
-  max-width: 500px;
-  padding: 30px;
+  max-width: 400px;
+  padding: 20px 30px;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 .list-link {
@@ -25,9 +27,11 @@
 
 .error-header {
   display: inline-block;
+  margin: 40px 0 0;
 }
 
 .modal-close-icon {
-  float: right;
   cursor: pointer;
+  float: right;
+  position: absolute;
 }

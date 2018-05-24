@@ -24,7 +24,9 @@ class SingleLineGraph extends Component {
   componentDidMount() {
     this.createLineGraph();
   }
+
   // TODO: use .enter() and exit().remove() to have transitions
+  // TODO: fix grid to follow y-axis tick lines
   componentWillReceiveProps(nextProps) {
     if (
       nextProps.data.chart.length !== this.props.data.chart.length ||
