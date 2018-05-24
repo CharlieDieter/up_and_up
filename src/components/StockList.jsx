@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getTopFiveSymbols } from "../util/api_util";
+import { getTopFiveSymbols, fetchDetails } from "../util/api_util";
 import { CSSTransitionGroup } from "react-transition-group";
 import "../styles/StockList.css";
 
@@ -28,6 +28,7 @@ class StockList extends Component {
           transitionAppear={true}
           transitionAppearTimeout={500}
           transitionEnter={false}
+          transitionLeave={false}
         >
           <div className="list-nav">
             <div className="stock-list-group">

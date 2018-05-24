@@ -8,6 +8,8 @@ const Loader = props => {
       transitionName="loading"
       transitionAppear={true}
       transitionAppearTimeout={500}
+      transitionEnter={false}
+      transitionLeave={false}
     >
       <div key="1" className="load-screen">
         <img

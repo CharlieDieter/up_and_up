@@ -60,8 +60,8 @@ class Featured extends Component {
           transitionName="loading"
           transitionAppear={true}
           transitionAppearTimeout={500}
-          transitionEnter={true}
-          transitionEnterTimeout={500}
+          transitionEnter={false}
+          transitionLeave={false}
         >
           <div className="featured-left">
             <h2 className="featured-header">

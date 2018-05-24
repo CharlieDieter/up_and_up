@@ -1,6 +1,7 @@
 .header-nav {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px;
   background: #666c84;
 }
@@ -8,6 +9,7 @@
 .nav-bar-content {
   margin: auto;
   color: white;
+  width: 200px;
 }
 
 .nav-bar-content a {
