@@ -2,28 +2,22 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const News = props => {
-  const { news } = Object.values(props.data)[0][0];
-  debugger;
-  console.log(news);
-  const component = (
+  console.log(props.data);
+  return props.data ? (
     <div>
-      {news.map(n => {
-        return (
-          <div>
-            <h4>
-              <Link to={n.url}>{n.headline}</Link>
-            </h4>
-            <h6>{n.source}</h6>
-          </div>
-        );
-      })}
+      <h3>In the news:</h3>
+      {props.data.map(n => (
+        <div>
+          <h5>
+            <a href={n.url}>{n.headline}</a>
+          </h5>
+          <h6>{n.source}</h6>
+        </div>
+      ))}
     </div>
+  ) : (
+    <div>Loading...</div>
   );
-  return news ? <div>Loading...</div> : component;
 };
 
 export default News;
-
-News.defaultProps = {
-  data: { key: ["value"] }
-};

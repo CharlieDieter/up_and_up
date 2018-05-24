@@ -126,7 +126,7 @@ class SingleLineGraph extends Component {
   }
 
   render() {
-    return <svg ref={node => (this.graphNode = node)} />;
+    return <svg className="graph" ref={node => (this.graphNode = node)} />;
   }
 }
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import StockSearch from "./StockSearch";
 import "../styles/HeaderNav.css";
 
 class HeaderNav extends Component {
@@ -7,17 +8,13 @@ class HeaderNav extends Component {
     return (
       <div className="header-nav">
         <div className="nav-bar-content left">
-          <Link to="/list">Trending Stocks</Link>
+          <StockSearch />
         </div>
         <Link to="/many/mostactive">
           <h1 className="nav-bar-content">up and up</h1>
         </Link>
         <div className="nav-bar-content right">
-          <input
-            className="header-input"
-            type="text"
-            placeholder="search by symbol"
-          />
+          <Link to="/list">Trending Stocks</Link>
         </div>
       </div>
     );

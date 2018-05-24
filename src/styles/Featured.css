@@ -1,3 +1,14 @@
+.featured {
+  padding: 50px;
+}
 .featured-body {
   justify-content: space-around;
+}
+.featured-left {
+  float: left;
+}
+.news-container {
+  float: right;
+  margin-top: 50px;
+  max-width: 300px;
 }

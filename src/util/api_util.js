@@ -53,7 +53,7 @@ export const fetchOne = async (symbol, range) => {
   const result = [];
   await axios
     .get(
-      `https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote,chart&range=${range}`
+      `https://api.iextrading.com/1.0/stock/${symbol}/batch?types=quote,chart,news&range=${range}&last=5`
     )
     .then(({ data }) => result.push(data));
   return result;

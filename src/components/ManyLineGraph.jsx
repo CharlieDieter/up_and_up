@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { line } from "d3-shape";
-import { select, selectAll, mouse } from "d3-selection";
+import { select } from "d3-selection";
 import { axisLeft, axisBottom } from "d3-axis";
 import { extent, max, min } from "d3-array";
 import graphScheme from "../styles/scheme";

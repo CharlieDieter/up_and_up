@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import HeaderNav from "./HeaderNav";
 import Legend from "./Legend";
 import ManyLineGraph from "./ManyLineGraph";
 import { getTopFive } from "../util/api_util.js";
@@ -25,10 +24,8 @@ class Dashboard extends Component {
       batch === "gainers"
         ? "highest performing"
         : batch === "mostactive" ? "most active" : "biggest losing";
-    // TODO: update graph and fetch most active and biggest losers
     const dashboard = (
       <div>
-        <HeaderNav />
         <h2>{`${group} stocks of the last week`}</h2>
         <ManyLineGraph
           rawData={this.state.data}

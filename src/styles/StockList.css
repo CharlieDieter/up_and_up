@@ -1,3 +1,9 @@
 .list-nav {
   margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.stock-list-group {
+  display: inline-block;
 }

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import HeaderNav from "./HeaderNav";
-import News from "./News";
 import SingleLineGraph from "./SingleLineGraph";
 import RangeList from "./RangeList";
-import { fetchOne, fetchDetails } from "../util/api_util.js";
+import News from "./News";
+import { fetchOne } from "../util/api_util.js";
 import { withRouter } from "react-router-dom";
 import "../styles/Featured.css";
 
@@ -37,6 +36,7 @@ class Featured extends Component {
   render() {
     const { symbol } = this.props.match.params;
     const { companyName } = this.state.data.quote;
+    const { news } = this.state.data;
     const { range } = this.state;
     const rangeDescription =
       range === "1m"
@@ -51,21 +51,24 @@ class Featured extends Component {
                 ? "two years"
                 : range === "ytd" ? "year to date" : "five years";
     const featured = (
-      <div>
-        <HeaderNav />
-        <h2>
-          {companyName} over the last {rangeDescription}
-        </h2>
-        <h4 />
-        <div className="featured-body">
-          <SingleLineGraph
-            data={this.state.data}
-            totalHeight={window.innerHeight - window.innerHeight / 100 * 40}
-            totalWidth={window.innerWidth - window.innerWidth / 100 * 20}
-            margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
-            range={this.state.range}
-          />
-          <RangeList symbol={symbol} range={range} />
+      <div className="featured">
+        <div className="featured-left">
+          <h2 className="featured-header">
+            {companyName} over the last {rangeDescription}
+          </h2>
+          <div className="featured-body">
+            <SingleLineGraph
+              data={this.state.data}
+              totalHeight={window.innerHeight - window.innerHeight / 100 * 40}
+              totalWidth={window.innerWidth - window.innerWidth / 100 * 30}
+              margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
+              range={this.state.range}
+            />
+            <RangeList symbol={symbol} range={range} />
+          </div>
+        </div>
+        <div className="news-container">
+          <News data={news} />
         </div>
       </div>
     );
