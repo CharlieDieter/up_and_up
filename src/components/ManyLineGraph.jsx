@@ -4,6 +4,7 @@ import { parseTime } from "../util/d3_util";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { line, curveBasis } from "d3-shape";
 import { select } from "d3-selection";
+import { transition } from "d3-transition";
 import { axisLeft, axisBottom } from "d3-axis";
 import { extent, max, min } from "d3-array";
 import graphScheme from "../styles/scheme";
