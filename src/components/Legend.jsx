@@ -27,8 +27,8 @@ class Legend extends Component {
             changePercent
           } = this.state.details[s][0].quote;
 
-          const upArrow = <i class="material-icons">arrow_upward</i>;
-          const downArrow = <i class="material-icons">arrow_downward</i>;
+          const upArrow = <i className="material-icons">arrow_upward</i>;
+          const downArrow = <i className="material-icons">arrow_downward</i>;
 
           const changePercentColor =
             changePercent < 0 ? "rgb(207, 61, 61)" : "rgb(52, 203, 117)";

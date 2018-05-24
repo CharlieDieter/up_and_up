@@ -6,6 +6,7 @@ const Loader = props => {
     <div className="load-screen">
       <img
         id="loader"
+        alt="chart emoji"
         src="http://www.emoji.co.uk/files/mozilla-emojis/objects-mozilla/11933-chart-with-upwards-trend.png"
       />
     </div>

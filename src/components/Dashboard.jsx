@@ -31,14 +31,12 @@ class Dashboard extends Component {
         <ManyLineGraph
           rawData={this.state.data}
           totalHeight={window.innerHeight - window.innerHeight / 100 * 50}
-          totalWidth={window.innerWidth - window.innerWidth / 100 * 20}
+          totalWidth={window.innerHeight * 1.3}
           margin={{ top: 50, right: 20, bottom: 20, left: 50 }}
         />
         <Legend batch={this.state.batch} />
       </div>
     );
-
-    const loading = <div>Loading...</div>;
 
     return this.state.loading ? <Loader /> : dashboard;
   }

@@ -27,6 +27,14 @@ class ManyLineGraph extends Component {
     this.createLineGraph();
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { totalWidth } = this.props;
+    debugger;
+    if (nextProps.totalWidth !== totalWidth) {
+      this.createLineGraph();
+    }
+  }
+
   createLineGraph() {
     const { margin, totalWidth, totalHeight, rawData } = this.props;
 

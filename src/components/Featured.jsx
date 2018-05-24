@@ -74,8 +74,6 @@ class Featured extends Component {
       </div>
     );
 
-    const loading = <div>Loading...</div>;
-
     return this.state.loading ? <Loader /> : featured;
   }
 }
