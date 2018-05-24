@@ -25,21 +25,25 @@
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
+    height: 10%;
+    width: 10%;
   }
   25% {
     transform: rotate(360deg);
+    height: 5%;
+    width: 5%;
   }
   50% {
-    transform: rotate(-45deg);
+    transform: rotate(180deg);
   }
   100% {
     transform: rotate(0deg);
+    height: 10%;
+    width: 10%;
   }
 }
 #loader {
-  margin: 10% auto;
-  height: 10%;
-  width: 10%;
+  margin: 25px auto;
 }
 #loader {
   -webkit-animation: spinner 3s infinite;

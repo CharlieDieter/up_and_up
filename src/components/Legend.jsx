@@ -55,9 +55,6 @@ class Legend extends Component {
         transitionName="loading"
         transitionAppear={true}
         transitionAppearTimeout={500}
-        transitionEnter={false}
-        transitionLeave={true}
-        transitionLeaveTimeout={1000}
       >
         <div className="legend">
           {this.state.symbols.map((s, idx) => {
