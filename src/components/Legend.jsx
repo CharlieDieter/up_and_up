@@ -46,7 +46,8 @@ class Legend extends Component {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          width: " 50%"
+          width: " 50%",
+          height: "140px"
         }
       : {};
 

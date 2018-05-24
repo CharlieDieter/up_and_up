@@ -37,6 +37,10 @@ class Featured extends Component {
     }
   }
 
+  loading = bool => {
+    this.setState({ loading: bool });
+  };
+
   render() {
     const { symbol } = this.props.match.params;
     const { companyName } = this.state.data.quote;
@@ -70,6 +74,7 @@ class Featured extends Component {
             <Legend symbol={symbol} />
             <div className="featured-body">
               <SingleLineGraph
+                loading={this.loading}
                 data={this.state.data}
                 totalHeight={Math.max(
                   window.innerHeight - window.innerHeight / 100 * 50,

@@ -32,6 +32,7 @@ class SingleLineGraph extends Component {
       nextProps.data.chart.length !== this.props.data.chart.length ||
       nextProps.data.quote.symbol !== this.props.data.quote.symbol
     ) {
+      this.props.loading(true);
       this.props.data.chart = nextProps.data.chart;
       this.props.data.quote = nextProps.data.quote;
       select(".single-line").remove();
@@ -129,6 +130,7 @@ class SingleLineGraph extends Component {
       .style("stroke", "black")
       .style("stroke-width", "1px")
       .style("opacity", "0");
+    setTimeout(() => this.props.loading(false), 1000);
   }
 
   render() {
