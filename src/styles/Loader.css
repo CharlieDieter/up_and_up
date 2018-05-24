@@ -37,7 +37,9 @@
   }
 }
 #loader {
-  margin: 20% auto;
+  margin: 10% auto;
+  height: 10%;
+  width: 10%;
 }
 #loader {
   -webkit-animation: spinner 3s infinite;
