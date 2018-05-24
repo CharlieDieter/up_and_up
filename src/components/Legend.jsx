@@ -59,7 +59,7 @@ class Legend extends Component {
           } = this.state.details[s][0].quote;
 
           const colorOnFeatured = this.props.symbol
-            ? this.colorHash.hex(this.props.symbol)
+            ? this.colorHash.hex(this.props.symbol.toLowerCase())
             : graphScheme[(idx * 2) % graphScheme.length];
 
           const upArrow = <i className="material-icons">arrow_upward</i>;
@@ -93,10 +93,12 @@ class Legend extends Component {
                     <div className="legend-text">{s}</div>
                   </div>
                 </Link>
-                <h5 className="legend-company-name">{companyName}</h5>
+                <h5 className="legend-company-name">
+                  {!this.props.symbol && companyName}
+                </h5>
               </div>
               <div className="legend-stats">
-                <div className="currently">currently:</div>
+                <div className="currently" />
                 <div className="close">{`$${close}`}</div>
                 <div>
                   <div className="change" style={{ color: changeColor }}>

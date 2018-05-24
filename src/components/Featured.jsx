@@ -59,7 +59,7 @@ class Featured extends Component {
           <h2 className="featured-header">
             {companyName} over the last {rangeDescription}
           </h2>
-          <RangeList symbol={symbol} range={range} />
+          <Legend symbol={symbol} />
           <div className="featured-body">
             <SingleLineGraph
               data={this.state.data}
@@ -68,8 +68,8 @@ class Featured extends Component {
               margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
               range={this.state.range}
             />
-            <Legend symbol={symbol} />
           </div>
+          <RangeList symbol={symbol} range={range} />
         </div>
         <div className="news-container">
           <News data={news} />
