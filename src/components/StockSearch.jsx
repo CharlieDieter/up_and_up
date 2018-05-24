@@ -1,15 +1,24 @@
 import React, { Component } from "react";
+import ErrorModal from "./ErrorModal";
 import { withRouter } from "react-router-dom";
 import { fetchOne } from "../util/api_util";
 
 class StockSearch extends Component {
-  state = {
-    val: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      val: "",
+      error: false
+    };
+  }
 
   updateVal = e => {
     e.preventDefault();
     this.setState({ val: e.target.value });
+  };
+
+  closeModal = () => {
+    this.setState({ error: false, val: "" });
   };
 
   handleSubmit = e => {
@@ -22,12 +31,16 @@ class StockSearch extends Component {
           this.props.history.push(`/featured/${val}/1m`)
         );
       })
-      .catch(err => alert("Sorry! We couldn't find that one."));
+      .catch(error => {
+        return this.setState({ error });
+      });
   };
 
   render() {
+    const { error } = this.state;
     return !this.props.match.params.range ? (
       <form onSubmit={this.handleSubmit}>
+        {error && <ErrorModal error={error} close={this.closeModal} />}
         <input
           className="header-input"
           type="text"
