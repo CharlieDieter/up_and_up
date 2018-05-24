@@ -17,6 +17,15 @@ class StockSearch extends Component {
     this.setState({ val: e.target.value });
   };
 
+  // PreventDefault within conditional so form does not submit again when modal is open,
+  // but does submit when modal is closed
+  handleEnter = e => {
+    if (this.state.error && e.keyCode === 13) {
+      e.preventDefault();
+      this.closeModal();
+    }
+  };
+
   closeModal = () => {
     this.setState({ error: false, val: "" });
   };
@@ -47,6 +56,7 @@ class StockSearch extends Component {
           placeholder="search by symbol"
           value={this.state.val}
           onChange={this.updateVal}
+          onKeyDown={this.handleEnter}
         />
       </form>
     ) : (
