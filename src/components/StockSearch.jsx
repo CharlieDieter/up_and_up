@@ -22,7 +22,7 @@ class StockSearch extends Component {
           this.props.history.push(`/featured/${val}/1m`)
         );
       })
-      .catch(err => console.log(err));
+      .catch(err => alert("Sorry! We couldn't find that one."));
   };
 
   render() {
