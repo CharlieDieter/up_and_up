@@ -63,8 +63,14 @@ class Featured extends Component {
           <div className="featured-body">
             <SingleLineGraph
               data={this.state.data}
-              totalHeight={window.innerHeight - window.innerHeight / 100 * 50}
-              totalWidth={window.innerWidth - window.innerWidth / 100 * 40}
+              totalHeight={Math.max(
+                window.innerHeight - window.innerHeight / 100 * 50,
+                200
+              )}
+              totalWidth={Math.max(
+                window.innerWidth - window.innerWidth / 100 * 40,
+                400
+              )}
               margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
               range={this.state.range}
             />

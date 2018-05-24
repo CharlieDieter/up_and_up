@@ -27,14 +27,6 @@ class ManyLineGraph extends Component {
     this.createLineGraph();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { totalWidth } = this.props;
-    debugger;
-    if (nextProps.totalWidth !== totalWidth) {
-      this.createLineGraph();
-    }
-  }
-
   createLineGraph() {
     const { margin, totalWidth, totalHeight, rawData } = this.props;
 
@@ -94,7 +86,7 @@ class ManyLineGraph extends Component {
           select(`.${company[0].symbol}-label`)
             .transition()
             .duration(300)
-            .style("font-size", "30px")
+            .style("font-size", "50px")
             .style("opacity", 1);
         })
         .on("mouseleave", () => {

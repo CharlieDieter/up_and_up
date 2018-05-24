@@ -30,8 +30,11 @@ class Dashboard extends Component {
         <h2>{`Today's ${group} Stocks over the Last Week`}</h2>
         <ManyLineGraph
           rawData={this.state.data}
-          totalHeight={window.innerHeight - window.innerHeight / 100 * 50}
-          totalWidth={window.innerHeight * 1.3}
+          totalHeight={Math.max(
+            window.innerHeight - window.innerHeight / 100 * 50,
+            300
+          )}
+          totalWidth={Math.max(window.innerHeight * 1.3, 600)}
           margin={{ top: 50, right: 20, bottom: 20, left: 50 }}
         />
         <Legend batch={this.state.batch} />
