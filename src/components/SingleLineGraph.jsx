@@ -55,7 +55,7 @@ class SingleLineGraph extends Component {
       .attr("height", height + margin.top + margin.bottom)
       .attr("class", "maingroup")
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     const x = scaleTime().range([0, width]);
     const y = scaleLinear().range([height, 0]);
@@ -74,7 +74,7 @@ class SingleLineGraph extends Component {
     g
       .append("g")
       .attr("class", "grid")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", `translate(0, ${height})`)
       .call(
         axisBottom(x)
           .ticks(dates.length % 10)

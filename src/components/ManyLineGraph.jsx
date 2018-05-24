@@ -11,18 +11,6 @@ import graphScheme from "../styles/scheme";
 import "../styles/ManyLineGraph.css";
 
 class ManyLineGraph extends Component {
-  static defaultProps = {
-    margin: {
-      top: 20,
-      right: 20,
-      bottom: 20,
-      left: 20
-    },
-    width: 700,
-    height: 500,
-    data: {}
-  };
-
   componentDidMount() {
     this.createLineGraph();
   }
@@ -37,7 +25,7 @@ class ManyLineGraph extends Component {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     const x = scaleTime().range([0, width]);
     const y = scaleLinear().range([height, 0]);
@@ -133,7 +121,7 @@ class ManyLineGraph extends Component {
 
     g
       .append("g")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", `translate(0, ${height})`)
       .call(axisBottom(x))
       .select(".domain")
       .remove();

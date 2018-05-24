@@ -1,5 +1,5 @@
 import React from "react";
-
+import Loader from "./Loader";
 const News = props => {
   return props.data ? (
     <div>
@@ -14,7 +14,7 @@ const News = props => {
       ))}
     </div>
   ) : (
-    <div>Loading...</div>
+    <Loader />
   );
 };
 

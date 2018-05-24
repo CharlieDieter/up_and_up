@@ -1,15 +1,25 @@
 import React from "react";
+import { CSSTransitionGroup } from "react-transition-group";
 import "../styles/Loader.css";
 
 const Loader = props => {
   return (
-    <div className="load-screen">
-      <img
-        id="loader"
-        alt="chart emoji"
-        src="http://www.emoji.co.uk/files/mozilla-emojis/objects-mozilla/11933-chart-with-upwards-trend.png"
-      />
-    </div>
+    <CSSTransitionGroup
+      transitionName="loading"
+      transitionAppear={true}
+      transitionAppearTimeout={500}
+      transitionEnter={false}
+      transitionLeave={true}
+      transitionLeaveTimeout={1000}
+    >
+      <div key="1" className="load-screen">
+        <img
+          id="loader"
+          alt="chart emoji"
+          src="http://www.emoji.co.uk/files/mozilla-emojis/objects-mozilla/11933-chart-with-upwards-trend.png"
+        />
+      </div>
+    </CSSTransitionGroup>
   );
 };
 

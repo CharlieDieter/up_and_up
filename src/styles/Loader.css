@@ -47,3 +47,12 @@
   -o-animation: spinner 3s infinite;
   animation: spinner 3s infinite;
 }
+
+.loading-appear {
+  opacity: 0.01;
+}
+
+.loading-appear.loading-appear-active {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}

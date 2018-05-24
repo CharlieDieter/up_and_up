@@ -6,6 +6,7 @@ import Loader from "./Loader";
 import Legend from "./Legend";
 import { fetchOne } from "../util/api_util.js";
 import { withRouter } from "react-router-dom";
+import { CSSTransitionGroup } from "react-transition-group";
 import "../styles/Featured.css";
 
 class Featured extends Component {
@@ -55,31 +56,40 @@ class Featured extends Component {
                 : range === "ytd" ? "year to date" : "five years";
     const featured = (
       <div className="featured">
-        <div className="featured-left">
-          <h2 className="featured-header">
-            {companyName} over the last {rangeDescription}
-          </h2>
-          <Legend symbol={symbol} />
-          <div className="featured-body">
-            <SingleLineGraph
-              data={this.state.data}
-              totalHeight={Math.max(
-                window.innerHeight - window.innerHeight / 100 * 50,
-                200
-              )}
-              totalWidth={Math.max(
-                window.innerWidth - window.innerWidth / 100 * 40,
-                400
-              )}
-              margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
-              range={this.state.range}
-            />
+        <CSSTransitionGroup
+          transitionName="loading"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnter={false}
+          transitionLeave={true}
+          transitionLeaveTimeout={1000}
+        >
+          <div className="featured-left">
+            <h2 className="featured-header">
+              {companyName} over the last {rangeDescription}
+            </h2>
+            <Legend symbol={symbol} />
+            <div className="featured-body">
+              <SingleLineGraph
+                data={this.state.data}
+                totalHeight={Math.max(
+                  window.innerHeight - window.innerHeight / 100 * 50,
+                  200
+                )}
+                totalWidth={Math.max(
+                  window.innerWidth - window.innerWidth / 100 * 40,
+                  400
+                )}
+                margin={{ top: 20, right: 20, bottom: 30, left: 50 }}
+                range={this.state.range}
+              />
+            </div>
+            <RangeList symbol={symbol} range={range} />
           </div>
-          <RangeList symbol={symbol} range={range} />
-        </div>
-        <div className="news-container">
-          <News data={news} />
-        </div>
+          <div className="news-container">
+            <News data={news} />
+          </div>
+        </CSSTransitionGroup>
       </div>
     );
 
