@@ -10,7 +10,7 @@ import "../styles/Dashboard.css";
 class Dashboard extends Component {
   state = {
     loading: true,
-    batch: this.props.match.params.batch || "gainers"
+    batch: this.props.match.params.batch || "mostactive"
   };
 
   componentDidMount() {

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <button type="button" id="1" name="button"></button>
+    <button type="button" id="2" name="button"></button>
+    <button type="button" id="3" name="button"></button>
+
+  </body>
+
+  <script type="text/javascript">
+  var arr = ["a", "b", "c"];
+var buttons = document.getElementsByTagName("button");
+
+for (var i = 0; i < arr.length; i++) {
+  (function(i) {
+    buttons[i].onclick = function() {
+      alert(arr[i]);
+    };
+  })(i);
+}
+</script>
+</html>

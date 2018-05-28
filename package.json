@@ -2,7 +2,7 @@
   "name": "market_api_test",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://charliedieter.github.io/up_and_up",
+  "homepage": "http://charliedieter.com/up_and_up",
   "dependencies": {
     "axios": "^0.18.0",
     "color-hash": "^1.0.3",
